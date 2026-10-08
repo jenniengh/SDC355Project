@@ -17,6 +17,10 @@ header {
     margin-bottom: 3rem;
 }
 
+#greetings {
+    margin: 3rem 0;
+}
+
 main section {
     margin-bottom: 3rem;
 }
