@@ -23,8 +23,9 @@ function populateProjects() {
         const projectElement = document.createElement("div");
         projectElement.innerHTML = `
             <h3>${project.name}</h3>
-            <img src="${project.image}" alt="${project.name}">
-            <a href="${project.link}" target="_blank">View Project</a>
+            <a href="${project.link}" target="_blank">
+                <img src="${project.image}" alt="${project.name}">
+            </a>
         `;
         projectGrid.appendChild(projectElement);
     });
