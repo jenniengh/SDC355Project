@@ -5,6 +5,15 @@ const PROJECTS = [
     {id: 3, name: 'Project 3', image: 'images/project3.jpg', link: 'https://github.com/jenniengh/Trail'},
 ];
 
+// skills data
+const SKILLS = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "GitHub",
+];
+
 // prompt user to enter their name
 let user = prompt("Please enter your name:", "Guest");
 
@@ -14,6 +23,34 @@ if (user !== null && user !== "") {
 }
 else {
     document.getElementById("greetings").textContent = `Hello, stranger!`;
+}
+
+// use forEach() to display skills as a bulleted list in the About section.
+const skillsList = document.getElementById("skills-list");
+SKILLS.forEach(skill => {
+    const li = document.createElement("li");
+    li.textContent = skill;
+    skillsList.appendChild(li);
+});
+
+// select all project divs and count them
+const projectList = document.querySelectorAll(".project-grid div");
+const projectCount = projectList.length;
+
+// select featured content divs
+const featuredResources = document.getElementById("featured-resources");
+const featuredProjects = document.getElementById("featured-projects");
+
+// if fewer than 3 projects, show both
+if (projectCount < 3) {
+    featuredResources.style.display = "block";
+    featuredProjects.style.display = "block";
+}
+
+// otherwise, show personal projects and hide university resources
+else {
+    featuredResources.style.display = "none";
+    featuredProjects.style.display = "block";
 }
 
 // populate projects
@@ -32,3 +69,34 @@ function populateProjects() {
 }
 
 populateProjects();
+
+// toggle modes
+const toggleSwitch = document.querySelector('#dark-mode-toggle');
+const toggleLabel = document.querySelector('#toggle-label');
+
+// Handle theme swapping states
+function switchTheme(event) {
+    if (event.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleLabel.textContent = 'Dark Mode';
+    localStorage.setItem('theme', 'dark');
+    } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    toggleLabel.textContent = 'Light Mode';
+    localStorage.setItem('theme', 'light');
+    }    
+}
+
+// Monitor input modifications
+toggleSwitch.addEventListener('change', switchTheme, false);
+
+// Read stored profile properties on initialization
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    if (savedTheme === 'dark') {
+    toggleSwitch.checked = true;
+    toggleLabel.textContent = 'Dark Mode';
+    }
+}

@@ -1,28 +1,110 @@
+:root {
+    --bg-color: #fefae0;
+    --text-color: #432818;
+    --heading-color: #582f0e;
+    --track-color: #35322a;
+    --accent-color: #e9edc9;
+    --section-color: #e9edc9;
+    --section-color-alt: #faedcd;
+}
+
+[data-theme="dark"] {
+    --bg-color: #201d1b;
+    --text-color: #fefae0;
+    --heading-color: #b5da92;
+    --track-color: #fcf8ee;
+    --accent-color: #0c0c0a;
+    --section-color: #424437;
+    --section-color-alt: #362b21;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+html {
     font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: var(--text-color);
 }
 
 main {
     max-width: 1000px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--section-color);
+
+}
+
+main > section {
+    padding: 4rem;
+}
+
+main > section:nth-child(odd) {
+    background-color: var(--section-color-alt);
 }
 
 header {
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
 }
 
-#greetings {
-    margin: 3rem 0;
+nav {
+    max-width: 500px;
 }
 
-main section {
-    margin-bottom: 3rem;
+nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    list-style-type: none;
+}
+
+h1, h2 {
+    color: var(--heading-color);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+h3 {
+    padding-top: 2rem;
+    font-weight: 700;
+}
+
+header, footer {
+    background-color: var(--section-color);
+    width: 100%;
+    padding: 4rem;
+    text-align: center;
+}
+
+footer {
+    background-color: var(--section-color-alt);
+}
+
+#featured-projects img {
+    max-width: 600px;
 }
 
 .project-grid {
@@ -38,4 +120,67 @@ main section {
 
 form input, form textarea {
     width: 100%;
+}
+
+.toggle-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* TOGGLE SWITCH CONTROLS */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+/* Container for the sliding mechanism */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Completely hide the native checkbox input */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The visual background track of the slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--track-color);
+    border-radius: 34px;
+    transition: background-color 0.3s ease;
+}
+
+/* The circular moving switch knob */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Changes track background color when checked */
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+/* Moves the circular knob smoothly to the right when checked */
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
