@@ -100,3 +100,37 @@ if (savedTheme) {
     toggleLabel.textContent = 'Dark Mode';
     }
 }
+
+/* 
+Add Interactivity to the Form Submit Button
+
+Select the Submit button from your Contact form using querySelector() or getElementById().
+
+Add an event listener using addEventListener("click", ...).
+
+When the button is clicked:
+
+Prevent the form from refreshing the page using event.preventDefault().
+
+Display a confirmation message using alert(), such as "Thank you, [name], your message has been sent!", using the user's input from the form.
+*/
+
+const submitButton = document.querySelector('#submit-button');
+submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const nameInput = document.querySelector('#name');
+    const name = nameInput.value;
+    // only submit if all fields are filled
+    if (!name || !document.querySelector('#email').value || !document.querySelector('#subject').value || !document.querySelector('#message').value) {
+        alert('Please fill in all fields before submitting the form.');
+        return;
+    }
+    else {
+        alert(`Thank you, ${name}, your message has been sent!`);
+        // clear the form after submission
+        document.querySelector('#contact-form').reset();
+    }
+    
+});
+
