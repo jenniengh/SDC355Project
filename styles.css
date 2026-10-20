@@ -10,7 +10,7 @@
 
 [data-theme="dark"] {
     --bg-color: #201d1b;
-    --text-color: #fefae0;
+    --text-color: #fff;
     --heading-color: #b5da92;
     --track-color: #fcf8ee;
     --accent-color: #0c0c0a;
@@ -44,6 +44,11 @@ ul {
 }
 
 a {
+    color: var(--heading-color);
+    font-weight: 700;
+}
+
+a:hover {
     color: var(--text-color);
 }
 
@@ -97,6 +102,30 @@ header, footer {
     width: 100%;
     padding: 4rem;
     text-align: center;
+}
+
+form {
+    margin-top: 2rem;
+}
+
+form input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+form textarea {
+    padding: 0.5rem;
+    height: 100px;
+    resize: none;
+}
+button {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 1rem;
 }
 
 footer {
