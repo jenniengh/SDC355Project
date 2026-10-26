@@ -1,11 +1,15 @@
 :root {
     --bg-color: #fefae0;
     --text-color: #432818;
-    --heading-color: #582f0e;
+    --heading-color: #58170e;
     --track-color: #35322a;
     --accent-color: #e9edc9;
     --section-color: #e9edc9;
     --section-color-alt: #faedcd;
+
+    /* form status colors*/
+    --loading-color: #956515;
+    --success-color: #527546;
 }
 
 [data-theme="dark"] {
@@ -16,6 +20,10 @@
     --accent-color: #0c0c0a;
     --section-color: #424437;
     --section-color-alt: #362b21;
+
+    /* form status colors*/
+    --loading-color: #e9c779;
+    --success-color: #b5da92;
 }
 
 * {
@@ -125,6 +133,20 @@ form textarea {
     height: 100px;
     resize: none;
 }
+
+#form-status {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.loading-message {
+    color: var(--loading-color);
+}
+
+.success-message {
+    color: var(--success-color);
+}
+
 button {
     background-color: var(--text-color);
     color: var(--bg-color);

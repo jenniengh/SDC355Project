@@ -70,11 +70,37 @@ function populateProjects() {
 
 populateProjects();
 
+// 3.9: add new message to Projects section
+function addMsg() {
+    const projectGrid = document.getElementById("projects");
+    const newMsg = document.createElement('p');
+    newMsg.textContent = `This section will be updated as more projects are created.`;
+    projectGrid.appendChild(newMsg);
+}
+
+addMsg();
+
+// 3.9: modify existing elements with selectors
+const greetings = document.getElementById('greetings');
+
+if (greetings) {
+    greetings.style.color = 'var(--track-color)';
+    greetings.style.fontWeight = '700';
+    greetings.style.fontSize = '30px';
+}
+
+// 3.9: modify existing elements with selectors (cont.)
+const about = document.getElementById('about');
+
+if (about) {
+    about.style.border = '2px solid var(--heading-color)';
+}
+
 // toggle modes
 const toggleSwitch = document.querySelector('#dark-mode-toggle');
 const toggleLabel = document.querySelector('#toggle-label');
 
-// Handle theme swapping states
+// handle theme swapping states
 function switchTheme(event) {
     if (event.target.checked) {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -87,10 +113,10 @@ function switchTheme(event) {
     }    
 }
 
-// Monitor input modifications
+// monitor input modifications
 toggleSwitch.addEventListener('change', switchTheme, false);
 
-// Read stored profile properties on initialization
+// read stored profile properties on initialization
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -101,23 +127,71 @@ if (savedTheme) {
     }
 }
 
-// add interactivity to submit button
+// 3.9: add a timed confirmation for form submissions
+const contactForm = document.querySelector('#contact-form');
 const submitButton = document.querySelector('#submit-button');
-submitButton.addEventListener('click', function(event) {
+contactForm.addEventListener('submit', function(event) {
+    // prevent default form submission
     event.preventDefault();
 
-    const nameInput = document.querySelector('#name');
-    const name = nameInput.value;
-    // only submit if all fields are filled
-    if (!name || !document.querySelector('#email').value || !document.querySelector('#subject').value || !document.querySelector('#message').value) {
+    // get form values
+    const name = document.querySelector('#name').value.trim();
+    const email = document.querySelector('#email').value.trim();
+    const subject = document.querySelector('#subject').value.trim();
+    const message = document.querySelector('#message').value.trim();
+
+    // validate all fields are filled
+    if (!name || !email || !subject || !message) {
         alert('Please fill in all fields before submitting the form.');
         return;
     }
-    else {
-        alert(`Thank you, ${name}, your message has been sent!`);
-        // clear the form after submission
-        document.querySelector('#contact-form').reset();
+
+    // create a status message dynamically
+    let statusMessage = document.querySelector('#form-status');
+
+    if (!statusMessage) {
+        statusMessage = document.createElement('p');
+        statusMessage.id = 'form-status';
+        contactForm.appendChild(statusMessage);
     }
-    
+
+    // show loading message
+    statusMessage.textContent = 'Sending message...';
+    statusMessage.className = 'loading-message';
+
+    // disable submit button while processing
+    submitButton.disabled = true;
+
+    // display confirmation after 2 seconds
+    setTimeout(function() {
+        statusMessage.textContent = 'Message sent successfully!';
+        statusMessage.className = 'success-message';
+
+        contactForm.reset();
+        submitButton.disabled = false;
+    }, 3000);
 });
+
+// old code for submit button
+
+// add interactivity to submit button
+// const submitButton = document.querySelector('#submit-button');
+
+// submitButton.addEventListener('click', function(event) {
+//     event.preventDefault();
+
+//     const nameInput = document.querySelector('#name');
+//     const name = nameInput.value;
+//     // only submit if all fields are filled
+//     if (!name || !document.querySelector('#email').value || !document.querySelector('#subject').value || !document.querySelector('#message').value) {
+//         alert('Please fill in all fields before submitting the form.');
+//         return;
+//     }
+//     else {
+//         alert(`Thank you, ${name}, your message has been sent!`);
+//         // clear the form after submission
+//         document.querySelector('#contact-form').reset();
+//     }
+    
+// });
 
