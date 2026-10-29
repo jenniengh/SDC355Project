@@ -100,7 +100,16 @@
           <input type="text" id="subject" name="subject" required />
           <label for="message">Message:</label>
           <textarea id="message" name="message" required></textarea>
-          <button type="submit" id="submit-button">Send</button>
+          <!-- Add a tooltip that appears when the user hovers over the Contact Form’s Submit button -->
+          <div class="tooltip-wrapper">
+            <button
+              type="submit"
+              id="submit-button"
+              data-tooltip="Click to send your message!"
+            >
+              Send
+            </button>
+          </div>
           <button type="reset">Clear form</button>
         </form>
       </section>
@@ -109,5 +118,14 @@
     <footer>
       <p>&copy; 2026 Jennie Nguyen</p>
     </footer>
+
+    <!-- 4.8: Create a modal window using HTML and CSS that appears when the page loads -->
+    <div id="welcome-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2>Welcome!</h2>
+        <p>This page is a work in progress.</p>
+        <button id="close-modal-btn">Close</button>
+      </div>
+    </div>
   </body>
 </html>
